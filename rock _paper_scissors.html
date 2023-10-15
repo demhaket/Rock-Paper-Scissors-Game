@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+        <p>Rock Paper Scissors</p>
+        <button onclick="rock()">Rock</button>
+        <button onclick="paper()">Paper</button>
+        <button onclick="scissors()">Scissors</button>
+    </body>
+    
+    <script>
+        let randomNumber = Math.random()
+        let compMove = ' '
+        function pcPick(){
+            let randomNumber = Math.random()
+            if (randomNumber >= 0 && randomNumber < 0.33){
+                compMove = 'rock'
+            } else if (randomNumber >= 0.33 && randomNumber < 0.66) {
+                compMove = 'paper'
+            } else {
+                compMove = 'scissors'
+            // }
+        }}
+
+        function rock(){
+            pcPick()
+            if (compMove === 'rock'){
+                alert(`Computer picked ${compMove}. It's a tie!`)
+            }else if (compMove === 'paper'){
+                alert(`Computer picked ${compMove}. You lose!`)
+            } else {
+                alert(`Computer picked ${compMove}. You win!`)
+            }
+        }
+
+        function paper(){
+            pcPick()
+            if (compMove === 'rock'){
+                alert(`Computer picked ${compMove}. You win!`)
+            }else if (compMove === 'paper'){
+                alert(`Computer picked ${compMove}. It's a tie!`)
+            } else {
+                alert(`Computer picked ${compMove}. You lose!`)
+            }
+        }
+
+        function scissors(){
+            pcPick()
+            if (compMove === 'rock'){
+                alert(`Computer picked ${compMove}. You lose!`)
+            }else if (compMove === 'paper'){
+                alert(`Computer picked ${compMove}. You win!`)
+            } else {
+                alert(`Computer picked ${compMove}. It's a tie!`)
+            }
+        };
+    </script>
+
+</body>
+</html>
