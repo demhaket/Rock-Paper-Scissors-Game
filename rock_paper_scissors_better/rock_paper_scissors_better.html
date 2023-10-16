@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Rock Paper Scissors</h1> 
+        <button onclick="play('rock')">✊</button>
+        <button onclick="play('paper')">✋</button>
+        <button onclick="play('scissors')">✌️</button>
+        <p id="result"><br></p>
+        <p id="score"></p>
+        <button class="reset" onclick="resetScore()">Reset Score</button>
+        <button class='save' onclick="save()">Save Score</button>
+    </body>
+    
+    <script>
+        let randomNumber = Math.random()
+        let compMove = ' '
+        const rock = 'rock'
+        const paper = 'paper'
+        const scissors = 'scissors'
+        let result = document.querySelector('#result')
+        score = JSON.parse(localStorage.getItem('score'))        
+        let scoreText = document.querySelector('#score')
+        
+        function play(choice){
+            pcPick()
+            if (choice === compMove){
+                result.innerText = `You picked ${choice}. Computer picked ${compMove}.\n It's a tie!`
+                score.Tie++ 
+            } else if 
+            (choice === 'rock' && compMove === 'scissors'||
+             choice === 'paper' && compMove === 'rock' ||
+             choice === 'scissors' && compMove === 'paper') {
+                result.innerText = `You picked ${choice}. Computer picked ${compMove}.\n You Win!`
+                score.Win++ 
+            } else {
+                result.innerText = `You picked ${choice}. Computer picked ${compMove}.\n You lose!`
+                score.Loss++ 
+            }
+            updateScore()
+        }
+        
+        function pcPick(){
+            let randomNumber = Math.random()
+            if (randomNumber >= 0 && randomNumber < 0.33){
+                compMove = 'rock'
+            } else if (randomNumber >= 0.33 && randomNumber < 0.66) {
+                compMove = 'paper'
+            } else {
+                compMove = 'scissors'
+        }}
+
+        function updateScore(){
+            let scoreText = document.querySelector('#score')
+            scoreText.innerText = `Wins: ${score.Win} Losses: ${score.Loss} Ties: ${score.Tie}`
+        }
+
+        function resetScore(){
+            score.Loss = 0 
+            score.Win = 0 
+            score.Tie = 0
+            updateScore()
+            localStorage.setItem('score', JSON.stringify(score))
+            alert('Your score was reset.')
+        }
+
+        function save(){
+            localStorage.setItem('score', JSON.stringify(score))
+            alert('Your score was saved.')
+        }
+
+    </script>
+
+</body>
+</html>
