@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dom JS</title>
+    </head>
+    <body>
+        <p>Youtube Subscribe Button</p>
+        <button id="sub" onclick="subd()">Subscribe</button>
+        <p>Rock Paper Scissors</p>
+        <a href="rock_paper_scissors_better.html">Click here</a>
+        <p>Amazon Shipping Calculator</p>
+        <p>Order under $40 =+ $10 Shipping</p>
+        <p>Order of $40 or more = FREE Shipping</p>
+        <div class="input">
+            <input id="calc" type="text" placeholder="Calculate">
+            <button onclick="total()">Calculate</button>
+        </div>
+        <p id="totalPrice">''</p>
+
+        <script>
+            let subButton = document.getElementById('sub')
+            let calcText = document.getElementById('calc')
+            let totalText = document.getElementById('totalPrice')
+
+            function subd(){
+                if (subButton.innerText === 'Subscribe'){
+                    subButton.innerText = 'Subscribed'
+                }else{
+                    subButton.innerText = 'Subscribe'
+                }
+            }
+
+            function total(){
+                let orderValue = parseFloat(calcText.value)
+                if(isNaN(orderValue)){
+                    totalText.innerText = 'Please enter a valid number' 
+                }else{
+                    if (orderValue < 40){
+                        totalText.innerText = `Your Total Order is: \n$${orderValue} + $10 Shipping = $${orderValue += 10}`
+                    } else {
+                        totalText.innerText = `FREE Shipping!\n Your Total Order is: $${orderValue}`
+                    }
+                }
+            }
+
+        </script>
+        
+    </body>
+</html>
