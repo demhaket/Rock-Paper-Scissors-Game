@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Arrays Exercie</title>
+        <link rel="stylesheet" href="arrays.css">
+    </head>
+    <body>
+        <div class="todo1">    
+            <p>To do List Practice 1</p>
+            <input id="input1" type="text" placeholder="Todo name">
+            <button class="add" onclick="saveInput()">Add</button>
+        </div>
+        
+        <div class="todo2">
+            <p>To do List Practice 2</p>
+            <input id="input2" type="text" placeholder="Todo name">
+            <button class="add" onclick="saveInput2()">Add</button>
+            <p id="displayArray"></p>
+        </div>
+        
+        <div class="todo3">
+            <p>Todo List 3</p>
+            <input type="text" id="input3" placeholder="Todo name">
+            <input type="date" id="date">
+            <button class="add" onclick="saveInput3()">Add</button>
+            <div id="divtag"></div>
+        </div>
+        
+        <script>
+            let myArray = []
+            let myArray2 = []
+            let myArray3 = []
+
+            function saveInput(){
+                const input1 = document.getElementById('input1') 
+                const realInput = input1.value 
+                myArray.push(realInput)
+                input1.value = ''
+            }
+
+            function saveInput2(){
+                const input2 = document.getElementById('input2')
+                const realInput2 = input2.value
+                
+                myArray2.push(realInput2)
+                input2.value = ''
+                let ptag = document.getElementById('displayArray')
+                ptag.innerText = ''
+                
+                for (let i = 0; i < myArray2.length; i++){
+                    ptag.innerText += `${myArray2[i]} \n`
+                }
+            }
+
+            function saveInput3(){
+                const input3 = document.getElementById('input3')
+                const realInput3 = input3.value
+                
+                const date = document.getElementById('date')
+                let realDate = date.value
+
+                myArray3.push({
+                    realInput3,
+                    realDate
+                })
+                
+                let divtag = document.getElementById('divtag')
+                displayContent()
+
+                input3.value = ''
+                date.value = ''
+                console.log(myArray3)
+            }
+
+            function delete_input(index){
+                myArray3.splice(index, 1)
+                displayContent()
+                console.log(myArray3)
+            }
+
+            function displayContent(){
+                divtag.innerHTML = ''
+                for (let i = 0; i < myArray3.length; i++){
+                    divtag.innerHTML += `<div class='todo_row'>
+                        <div>${myArray3[i].realInput3}</div>
+                        <div>${myArray3[i].realDate}</div>
+                        <button class='delete' onclick='delete_input(${i})'>Delete</div></button>
+                    </div>`
+                }
+            }
+
+        </script>
+    </body>
+</html>
