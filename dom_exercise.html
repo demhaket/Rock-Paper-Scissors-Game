@@ -7,15 +7,15 @@
         <p>Youtube Subscribe Button</p>
         <button id="sub" onclick="subd()">Subscribe</button>
         <p>Rock Paper Scissors</p>
-        <a href="rock_paper_scissors_better.html">Click here</a>
+        <a href="rock_paper_scissors_better\rock_paper_scissors_better.html">Click here</a>
         <p>Amazon Shipping Calculator</p>
         <p>Order under $40 =+ $10 Shipping</p>
         <p>Order of $40 or more = FREE Shipping</p>
         <div class="input">
-            <input id="calc" type="text" placeholder="Calculate">
+            <input onkeydown='totalKey(event)' id="calc" type="text" placeholder="Calculate">
             <button onclick="total()">Calculate</button>
         </div>
-        <p id="totalPrice">''</p>
+        <p id="totalPrice"></p>
 
         <script>
             let subButton = document.getElementById('sub')
@@ -40,6 +40,12 @@
                     } else {
                         totalText.innerText = `FREE Shipping!\n Your Total Order is: $${orderValue}`
                     }
+                }
+            }
+
+            function totalKey(event){
+                if (event.key === 'Enter'){
+                    total()
                 }
             }
 
