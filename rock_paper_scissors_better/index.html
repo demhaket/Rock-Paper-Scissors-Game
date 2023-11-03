@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Rock Paper Scissors</h1> 
+        <button onclick="play('✊')">✊</button>
+        <button onclick="play('✋')">✋</button>
+        <button onclick="play('✌️')">✌️</button>
+        <p id="result">Pick a move to start playing<br></p>
+        <p id="score">Wins: <span id="winscore"></span> Losses: <span id="lossscore"></span> Ties: <span id="tiescore"></span></p>
+        <button class="autoplay" onclick="toggleAutoplay()">Autoplay</button>
+        <button class='save' onclick="save()">Save Score</button>
+        <button class="reset" onclick="resetScore()">Reset Score</button>
+    </body>
+    
+    <script>
+        
+        let randomNumber = Math.random()
+        let compMove = ' '
+        let randomMove = ''
+        let isRunning = false
+        let autoPlayInterval
+        let button = document.querySelector('.autoplay')
+        
+        const rock = 'rock'
+        const paper = 'paper'
+        const scissors = 'scissors'
+        let winScore = document.querySelector('#winscore')
+        let lossScore = document.querySelector('#lossscore')
+        let tieScore = document.querySelector('#tiescore')
+        
+        let result = document.querySelector('#result')
+        let score = JSON.parse(localStorage.getItem('score')) || { Win: 0, Loss: 0, Tie: 0 };     
+        let scoreText = document.querySelector('#score')
+        
+        function play(choice){
+            pcPick()
+            if (choice === compMove){
+                result.innerText = `You picked ${choice}. Computer picked ${compMove}.\n It's a tie!`
+                score.Tie++ 
+            } else if 
+            (choice === '✊' && compMove === '✌️'||
+             choice === '✋' && compMove === '✊' ||
+             choice === '✌️' && compMove === '✋') {
+                result.innerText = `You picked ${choice}. Computer picked ${compMove}.\n You Win!`
+                score.Win++ 
+            } else {
+                result.innerText = `You picked ${choice}. Computer picked ${compMove}.\n You lose!`
+                score.Loss++ 
+            }
+            clearInterval(autoPlayInterval)
+            button.innerText = 'Autoplay'
+            updateScore()
+        }
+        
+        function pcPick(){
+            let randomNumber = Math.random()
+            if (randomNumber >= 0 && randomNumber < 0.33){
+                compMove = '✊'
+            } else if (randomNumber >= 0.33 && randomNumber < 0.66) {
+                compMove = '✋'
+            } else {
+                compMove = '✌️'
+        }}
+
+        function updateScore(){
+            // let scoreText = document.querySelector('#score')
+            // scoreText.innerText = `Wins: ${score.Win} Losses: ${score.Loss} Ties: ${score.Tie}`
+            winScore.innerText = score.Win
+            lossScore.innerText = score.Loss
+            tieScore.innerText = score.Tie
+        }
+
+        function resetScore(){
+            score.Loss = 0 
+            score.Win = 0 
+            score.Tie = 0
+            updateScore()
+            localStorage.setItem('score', JSON.stringify(score))
+            alert('Your score was reset.')
+            clearInterval(autoPlayInterval)
+            button.innerText = 'Autoplay'
+            result.innerText ='Pick a move to start playing'
+        }
+
+        function save(){
+            localStorage.setItem('score', JSON.stringify(score))
+            alert('Your score was saved.')
+            clearInterval(autoPlayInterval)
+            button.innerText = 'Autoplay'
+        }
+
+        function randomPick(){
+            let randomNumber = Math.random()
+            if (randomNumber >= 0 && randomNumber < 0.33){
+                randomMove = '✊'
+            } else if (randomNumber >= 0.33 && randomNumber < 0.66) {
+                randomMove = '✋'
+            } else {
+                randomMove = '✌️'
+            }
+        }
+
+        function autoplay(){
+            pcPick()
+            randomPick()
+            if (randomMove === compMove){
+                result.innerText = `You picked ${randomMove}. Computer picked ${compMove}.\n It's a tie!`
+                score.Tie++ 
+            } else if 
+            (randomMove === '✊' && compMove === '✌️'||
+             randomMove === '✋' && compMove === '✊' ||
+             randomMove === '✌️' && compMove === '✋') {
+                result.innerText = `You picked ${randomMove}. Computer picked ${compMove}.\n You Win!`
+                score.Win++ 
+            } else {
+                result.innerText = `You picked ${randomMove}. Computer picked ${compMove}.\n You lose!`
+                score.Loss++ 
+            }
+            updateScore()
+        }
+
+        function toggleAutoplay(){
+
+            if (isRunning){
+                clearInterval(autoPlayInterval)
+                button.innerText = 'Autoplay'
+            }else{
+                autoPlayInterval = setInterval(autoplay, 1000)
+                button.innerText = 'Stop Autoplay'
+            }
+            
+            isRunning = !isRunning
+        }
+
+        function diplaySavedScore(){
+            winScore.innerText = score.Win
+            lossScore.innerText = score.Loss
+            tieScore.innerText = score.Tie
+        }
+
+        diplaySavedScore()
+
+    </script>
+
+</body>
+</html>
